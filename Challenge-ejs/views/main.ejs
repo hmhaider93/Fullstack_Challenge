@@ -1,0 +1,35 @@
+<%- include("header") -%>
+    
+   <% documents.forEach(function(document){ %>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2><%= document.name %></h2>
+                </div>
+            
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <p><%= document.instructions %></p>
+                </div>
+                <div class="col-sm-4">
+                    <form action="/delete" method="post">
+                        <button name="delButton" value=<%= document.id %> class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            
+            </div>
+            <hr>
+        </div>
+
+   <% }); %>
+
+
+    <form id="new-item" action="/" method="post">
+        <input type="text" name='jobTitle' placeholder="Title of new job"><br>
+        <textarea rows="4" cols="50" name="instructions" placeholder="Write instructions.." ></textarea>><br>
+        <button type="submit" class="btn btn-primary">Add New</button>
+    </form>
+    
+<%- include("footer") -%>
