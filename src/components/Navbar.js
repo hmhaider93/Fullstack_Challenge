@@ -6,20 +6,20 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 import {Navbar, Nav} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 function Navlocal() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <div className="brand">
-        <Navbar.Brand href="#home">FullStack-Challenge</Navbar.Brand>
+        <Link to="/" className="navbar-brand">FullStack-Challenge</Link>
       </div>
       <div className="blog">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Instructions</Nav.Link>
-            <Nav.Link href="#link">Contact</Nav.Link>
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/instructions" className="nav-link">Instructions</Link>
           </Nav>
         </Navbar.Collapse>
       </div>

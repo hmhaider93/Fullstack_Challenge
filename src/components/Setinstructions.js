@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 import {Form, Button} from 'react-bootstrap';
 import axios from 'axios';
-
+// import Footer from './footer';
 
 export default class Setinstructions extends React.Component {
   constructor(props) {
@@ -17,17 +17,17 @@ export default class Setinstructions extends React.Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.state={
-      input: 'Test',
-      id: [],
-      description: [],
+      descriptiontest: [],
     };
   }
+
 
   componentDidMount() {
     axios.get('http://localhost:5000/routes/')
         .then((response) => {
-          this.setState({description: response.data.map((i) => i.post)});
-          this.setState({id: response.data.map((i) => i._id)});
+          this.setState({descriptiontest: response.data.map(function(val, index) {
+            return {id: val._id, description: val.post};
+          })});
         })
         .catch((error) => {
           console.log(error);
@@ -35,63 +35,44 @@ export default class Setinstructions extends React.Component {
   }
 
   onSubmit(event) {
-    console.log(event.target.value);
     event.preventDefault();
-    console.log(this);
+    console.log(event.target.id);
     this.setState({
-      input: event.target.value,
-    });
-    console.log(event.target.value);
-
-    // const instructionsid ={
-    // id: this.state.input,
-    // };
-    // axios.post('http://localhost:5000/routes/delete', instructionsid)
-    //  .then((res) => console.log(res.data));
-
-    // this.componentDidMount();
-    // }
+      descriptiontest: this.state.descriptiontest.filter(function(e) {
+        return e.id != event.target.id;
+      }),
+    })
+    ;
+    const id={
+      id: event.target.id,
+    };
+    axios.post('http://localhost:5000/routes/delete', id)
+        .then((res) => console.log(res.data));
   }
 
   handleClick(event) {
   }
 
 
-  createTable() {
-    const table=[];
-    // const array=this.state.description;
-    const arraylength=this.state.description.length;
-
-
-    for (let index = 0; index < arraylength; index++) {
-      table.push(
-          <Form onSubmit={this.onSubmit}>
+  render() {
+    return (
+      this.state.descriptiontest.map((value) => {
+        return (
+          <Form key={value.id} id={value.id} onSubmit={this.onSubmit}>
             <div className="instructions">
               <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Example textarea</Form.Label>
+                <Form.Label>Instructions Title</Form.Label>
                 <Form.Control as="textarea" rows={7}
                   ReadonlySet
-                  value={this.state.description}
-                  onChange={this.changeDescription}
+                  value={value.description}
                 />
               </Form.Group>
               <div className="buttona">
-                <Button variant="primary" type="submit" > Submit </Button>
+                <Button variant="danger" type="submit" > Delete </Button>
               </div>
             </div>
-          </Form>,
-      );
-    }
-    return table;
-  }
-
-  render() {
-    return (
-
-      <div>
-        {this.createTable()}
-      </div>
-    );
+          </Form>);
+      }));
   }
 }
 

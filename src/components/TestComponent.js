@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 import {Form, Button} from 'react-bootstrap';
 import axios from 'axios';
+import Footer from './footer';
 
 
 export default class TestComponent extends React.Component {
@@ -17,7 +18,7 @@ export default class TestComponent extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.state={
 
-      description: 'Hello world!',
+      description: 'Instructions Description Goes Here! Go to the Instructions link to see the added instructions. Press Add to add an instruction!',
     };
   }
 
@@ -41,21 +42,25 @@ export default class TestComponent extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
-        <div className="instructions">
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Example textarea</Form.Label>
-            <Form.Control as="textarea" rows={7}
-              required
-              value={this.state.description}
-              onChange={this.changeDescription}
-            />
-          </Form.Group>
-          <div className="buttona">
-            <Button variant="primary" type="submit"> Submit </Button>
+      <div>
+        <Form onSubmit={this.onSubmit}>
+          <div className="instructions">
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label>Instructions Title</Form.Label>
+              <Form.Control as="textarea" rows={7}
+                required
+                value={this.state.description}
+                onChange={this.changeDescription}
+              />
+            </Form.Group>
+            <div className="buttona">
+              <Button variant="primary" type="submit"> Add </Button>
+            </div>
           </div>
-        </div>
-      </Form>
+        </Form>
+        <Footer />
+      </div>
+
     );
   }
 }
