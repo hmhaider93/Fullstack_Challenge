@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
-/* eslint-disable linebreak-style */
+
 /* eslint-disable require-jsdoc */
-/* eslint linebreak-style: ["error", "windows"]*/
+
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';

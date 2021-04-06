@@ -1,7 +1,6 @@
-/* eslint-disable max-len */
-/* eslint-disable linebreak-style */
+
 /* eslint-disable require-jsdoc */
-/* eslint linebreak-style: ["error", "windows"]*/
+
 
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +17,7 @@ export default class TestComponent extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.state={
 
-      description: 'Instructions Description Goes Here! Go to the Instructions link to see the added instructions. Press Add to add an instruction!',
+      description: '',
     };
   }
 
@@ -51,6 +50,8 @@ export default class TestComponent extends React.Component {
                 required
                 value={this.state.description}
                 onChange={this.changeDescription}
+                // eslint-disable-next-line max-len
+                placeholder="Instructions Description Goes Here! Go to the Instructions link to see the added instructions. Press Add to add an instruction!"
               />
             </Form.Group>
             <div className="buttona">
