@@ -6,6 +6,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const TestSchema = new mongoose.Schema({
+  title: String,
   post: String,
 });
 
@@ -13,16 +14,20 @@ const Test = mongoose.model("test", TestSchema);
 
 router.route("/").get((req, res) => {
   Test.find()
-    .then((tests) => res.json(tests))
+    .then((tests) => {
+      console.log(tests);
+      res.json(tests)})
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.route("/add").post(function (req, res) {
   console.log("On add end point");
-  console.log(req.body.description);
+  console.log(req.body);
   const description = req.body.description;
+  const title = req.body.title;
 
   const Newpost = new Test({
+    title: title,
     post: description,
   });
   Newpost.save();
@@ -34,7 +39,10 @@ router.post("/update", function (req, res) {
   const id = req.body.id;
   Test.findByIdAndUpdate(
     id,
-    { post: req.body.description },
+    { 
+      title: req.body.title,
+      post: req.body.description 
+    },
     function (err, doc) {
       if (err) {
         console.log(err);
