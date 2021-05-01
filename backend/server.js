@@ -15,7 +15,7 @@ app.use(express.json());
 
 const port = 5000;
 
-mongoose.connect('mongodb://localhost:27017/fullStackChallenge', {
+mongoose.connect('mongodb://mongo:27017/fullStackChallenge', {
   useNerswUrlParser: true,
   useUnifiedTopology: true,
 });
